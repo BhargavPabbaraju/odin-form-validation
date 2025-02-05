@@ -59,3 +59,11 @@ select {
   align-items: center;
   width: 100%;
 }
+
+input:valid {
+  border-color: lime;
+}
+
+input[type="submit"]:valid {
+  border-color: black;
+}

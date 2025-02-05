@@ -1,15 +1,7 @@
 import "./styles.css";
 import { countriesList as countries } from "./countries";
 
-//live validation
-//auto validate upon leaving focus
-// submit should tell if more errors or give a hi5
-
 function validateEmail() {
-  // check if email is null and say it's required
-  //validate against an email regex and say inavlid email
-  //clear errors
-
   const input = document.getElementById("email");
   const error = document.getElementById("email-error");
   error.style.display = "block";
@@ -23,9 +15,6 @@ function validateEmail() {
 }
 
 function validatePassword() {
-  // check if null and say it's required
-  //validate length checks
-  //clear errors
   const input = document.getElementById("password");
   const error = document.getElementById("pass-error");
   const maxLength = input.getAttribute("maxlength");
@@ -46,9 +35,6 @@ function validatePassword() {
 }
 
 function validateConfirmPassword() {
-  // check if null and say it's required
-  //check if password is correct and if they match
-  //clear errors
   const input = document.getElementById("conf-pass");
   const error = document.getElementById("conf-pass-error");
   const password = document.getElementById("password");
@@ -65,9 +51,19 @@ function validateConfirmPassword() {
 }
 
 function validateZipCode() {
-  // check if null and say it's required
-  //check if length is exactly 6
-  //clear errors
+  const input = document.getElementById("zip");
+  const error = document.getElementById("zip-error");
+  const length = input.value.length;
+  error.style.display = "block";
+  if (input.validity.valueMissing) {
+    error.innerText = "Zip code is required";
+  } else if (length < 6) {
+    error.innerText = `Zipcode must have exactly 6 digits. Please enter ${6 - length} more digits`;
+  } else if (length > 6) {
+    error.innerText = `Zipcode must have exactly 6 digits. Please remove ${length - 6} digits`;
+  } else {
+    error.style.display = "none";
+  }
 }
 
 function renderCountryOptions() {
@@ -79,6 +75,19 @@ function renderCountryOptions() {
     con.innerText = country;
     countriesSelect.appendChild(con);
   });
+}
+
+function onSubmit(e) {
+  e.preventDefault();
+  const error = document.getElementById("submit-error");
+  const text = document.getElementById("success-text");
+  text.innerText = "";
+  error.style.display = "none";
+  if (!e.target.form.checkValidity()) {
+    error.style.display = "block";
+  } else {
+    text.innerText = "Yay you completed the form! 🙌";
+  }
 }
 
 function addValidationEvents() {
@@ -93,6 +102,13 @@ function addValidationEvents() {
   const confPassword = document.getElementById("conf-pass");
   confPassword.addEventListener("input", validateConfirmPassword);
   confPassword.addEventListener("mouseup", validateConfirmPassword);
+
+  const zip = document.getElementById("zip");
+  zip.addEventListener("input", validateZipCode);
+  zip.addEventListener("mouseup", validateZipCode);
+
+  const submit = document.getElementById("submit");
+  submit.addEventListener("click", onSubmit);
 }
 
 renderCountryOptions();

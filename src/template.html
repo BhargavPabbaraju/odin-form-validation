@@ -7,7 +7,9 @@
   </head>
   <body>
     <header>Form validation</header>
+    <div id="success-text"></div>
     <form novalidate action="post" id="form">
+      <div class="error" id="submit-error">Please clear all errors</div>
       <fieldset id="email-password">
         <div class="heading">Email and password</div>
         <label for="email">Email:</label>
@@ -51,13 +53,17 @@
         <label for="country">Country:</label>
         <select name="country" id="country" required></select>
         <label for="zip">Zip code:</label>
-        <input
-          type="number"
-          maxlength="6"
-          minlength="6"
-          placeholder="Enter your 6-digit zip code"
-          required
-        />
+        <div class="input-field">
+          <input
+            type="number"
+            maxlength="6"
+            minlength="6"
+            placeholder="Enter your 6-digit zip code"
+            required
+            id="zip"
+          />
+          <div id="zip-error" class="error">Zipcode error</div>
+        </div>
       </fieldset>
       <input type="submit" value="Submit" id="submit" />
     </form>
