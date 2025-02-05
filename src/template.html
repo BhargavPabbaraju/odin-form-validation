@@ -5,5 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <header>Form validation</header>
+    <form novalidate action="post" id="form">
+      <fieldset id="email-password">
+        <div class="heading">Email and password</div>
+        <label for="email">Email:</label>
+        <div class="input-field">
+          <input
+            id="email"
+            type="email"
+            placeholder="Enter your email address"
+            required
+          />
+          <div id="email-error" class="error">Email error</div>
+        </div>
+        <label for="password">Password:</label>
+        <div class="input-field">
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            maxlength="16"
+            minlength="6"
+            required
+          />
+          <div id="pass-error" class="error">Password error</div>
+        </div>
+        <label for="conf-pass">Confirm Password:</label>
+        <div class="input-field">
+          <input
+            type="password"
+            id="conf-pass"
+            placeholder="Confirm your password"
+            maxlength="16"
+            minlength="6"
+            required
+          />
+          <div id="conf-pass-error" class="error">Confirm Password error</div>
+        </div>
+      </fieldset>
+
+      <fieldset id="address">
+        <div class="heading">Address</div>
+        <label for="country">Country:</label>
+        <select name="country" id="country" required></select>
+        <label for="zip">Zip code:</label>
+        <input
+          type="number"
+          maxlength="6"
+          minlength="6"
+          placeholder="Enter your 6-digit zip code"
+          required
+        />
+      </fieldset>
+      <input type="submit" value="Submit" id="submit" />
+    </form>
+  </body>
 </html>
